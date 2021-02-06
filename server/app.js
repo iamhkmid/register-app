@@ -11,10 +11,21 @@ nextApp
   .prepare()
   .then(() => {
     const app = express();
+    const server = require("http").createServer(app);
+    const io = require("socket.io")(server);
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use(cors());
+
+    io.on("connection", (socket) => {
+      console.log("connection");
+      socket.emit("status", "Hello from Socket.io");
+
+      socket.on("disconnect", () => {
+        console.log("client disconnected");
+      });
+    });
 
     app.get("/test", (req, res) => {
       res.statusCode = 200;
@@ -29,7 +40,7 @@ nextApp
       return handle(req, res);
     });
 
-    app.listen(port, (err) => {
+    server.listen(port, (err) => {
       if (err) throw err;
       console.log(`Server running on ${port}`);
     });

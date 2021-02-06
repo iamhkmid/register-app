@@ -1,7 +1,8 @@
 import axios from "axios";
 import io from "socket.io-client";
+import { useEffect, useState } from "react";
 
-const endpoint = "https://register-app-upnyk.herokuapp.com/";
+const endpoint = "https://register-app-upnyk.herokuapp.com";
 // const endpoint = "http://localhost:3000";
 
 export const getStaticProps = async () => {
@@ -16,16 +17,26 @@ export const getStaticProps = async () => {
     ];
   }
   return {
-    props: { aku: data },
+    props: { dia: data },
   };
 };
 
-const Home = ({ aku }) => {
+const Home = ({ dia }) => {
+  const [aku, setAku] = useState("");
+
+  useEffect(() => {
+    const socket = io(endpoint);
+    socket.on("status", (data) => {
+      setAku(data);
+    });
+  }, []);
+
   return (
     <div>
-      {aku.map((ikan) => (
+      {dia.map((ikan) => (
         <h3 key={ikan.nim}>nama : {ikan.name}</h3>
       ))}
+      <h4>message: {aku}</h4>
     </div>
   );
 };
