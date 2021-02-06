@@ -39,9 +39,9 @@ nextApp
       res.end();
     });
 
-    app.get("*", (req, res) => {
-      return handle(req, res);
-    });
+    // app.get("*", (req, res) => {
+    //   return handle(req, res);
+    // });
 
     server.listen(port, (err) => {
       if (err) throw err;
