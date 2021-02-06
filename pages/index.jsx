@@ -2,23 +2,33 @@ import axios from "axios";
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
 
-const endpoint = "http://localhost:3000" || "http://register-app.vercel.app";
+const endpoint = "http://register-app.vercel.app";
 
 export const getStaticProps = async () => {
-  const res = await axios.get("/ayam");
-
+  let data;
+  try {
+    const res = await axios.get(endpoint + "/ayam");
+    data = await res.data;
+  } catch (err) {
+    data = [
+      { name: "Muhammad Hakim", nim: 124170004 },
+      { name: "Mikhael", nim: 124170008 },
+    ];
+  }
   return {
-    props: { aku: res.data },
+    props: { aku: data },
   };
 };
 
 const Home = ({ aku }) => {
   const [data, setData] = useState("");
   useEffect(() => {
-    const socket = io(endpoint);
-    socket.on("status", (data) => {
-      setData(data);
-    });
+    try {
+      const socket = io(endpoint);
+      socket.on("status", (data) => {
+        setData(data);
+      });
+    } catch (err) {}
   }, []);
 
   return (
