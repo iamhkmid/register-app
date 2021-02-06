@@ -1,7 +1,7 @@
 import axios from "axios";
 import io from "socket.io-client";
 
-const endpoint = "https://register-app-dspskrbbc.vercel.app";
+const endpoint = "https://register-app-upnyk.herokuapp.com/";
 // const endpoint = "http://localhost:3000";
 
 export const getStaticProps = async () => {
