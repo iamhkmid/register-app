@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon server/app.js",
+    "dev": "nodemon server/app.js -p $PORT",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production nodemon server/app.js -p $PORT"
   },
   "dependencies": {
     "axios": "^0.21.1",
