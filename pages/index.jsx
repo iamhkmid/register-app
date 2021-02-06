@@ -2,7 +2,7 @@ import axios from "axios";
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
 
-const endpoint = "http://register-app.vercel.app";
+const endpoint = "https://register-app-6xnai90th.vercel.app";
 
 export const getStaticProps = async () => {
   let data;
