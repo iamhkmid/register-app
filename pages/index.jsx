@@ -2,10 +2,10 @@ import axios from "axios";
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
 
-const endpoint = "http://localhost:3000";
+const endpoint = "http://localhost:3000" || "http://register-app.vercel.app";
 
 export const getStaticProps = async () => {
-  const res = await axios.get("http://localhost:3000/ayam");
+  const res = await axios.get("/ayam");
 
   return {
     props: { aku: res.data },
