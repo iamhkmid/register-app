@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon server/app.js -p $PORT",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production  nodemon server/app.js -p $PORT"
+    "start": "cross-env NODE_ENV=production  nodemon server/app.js -p $PORT",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "axios": "^0.21.1",
