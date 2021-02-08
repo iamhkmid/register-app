@@ -1,4 +1,4 @@
-const express = require("express");
+import express, { Request, Response } from "express";
 const next = require("next");
 const cors = require("cors");
 
@@ -27,16 +27,17 @@ nextApp
       });
     });
 
-    app.get("/test", (req, res) => {
+    app.get("/test", (req: Request, res: Response) => {
       res.statusCode = 200;
       res.json([
         { name: "Muhammad Luqmanul Hakim", nim: 124 },
         { name: "Mikhael sitorus", nim: 123 },
       ]);
+      console.log("s");
       res.end();
     });
 
-    app.get("*", (req, res) => {
+    app.get("*", (req: Request, res: Response) => {
       return handle(req, res);
     });
 
