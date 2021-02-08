@@ -1,5 +1,5 @@
 import axios from "axios";
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 
 const endpoint = "https://register-app-upnyk.herokuapp.com";
