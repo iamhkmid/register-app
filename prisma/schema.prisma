@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int          @id @default(autoincrement())
+  uuid        String       @unique @default(uuid())
+  username    String
+  name        String?
+  email       String?
+  password    String
+  role        UserRole     @default(USER)
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+  accessToken AccessToken?
+  profile     Profile?
+
+  @@map("users")
+}
+
+model AccessToken {
+  id          Int      @id @default(autoincrement())
+  uuid        String   @unique @default(uuid())
+  accessToken String   @map("access_token")
+  ipAddress   String   @map("ip_address")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  userId      Int      @unique
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@map("access_token")
+}
+
+model Profile {
+  id               Int      @id @default(autoincrement())
+  uuid             String   @unique @default(uuid())
+  noRegistrasi     String   @unique @map("no_registrasi")
+  namaLengkap      String   @map("nama_lengkap")
+  prodi            String
+  fakultas         String
+  statusPembayaran String   @map("status_pembayaran")
+  tempatLahir      String   @map("tempat_lahir")
+  tglLahir         String   @map("tgl_lahir")
+  jenisKelamin     String   @map("jenis_kelamin")
+  tinggiBadan      String   @map("tinggi_badan")
+  golonganDarah    String   @map("golongan_darah")
+  namaAyah         String   @map("nama_ayah")
+  pekerjaanAyah    String   @map("pekerjaan_ayah")
+  penghasilanAyah  String   @map("penghasilan_ayah")
+  noHpAyah         String   @map("no_hp_ayah")
+  namaIbu          String   @map("nama_ibu")
+  pekerjaanIbu     String   @map("pekerjaan_ibu")
+  penghasilanIbu   String   @map("penghasilan_ibu")
+  noHpIbu          String   @map("no_hp_ibu")
+  alamatLengkap    String   @map("alamat_lengkap")
+  penyakit         String?
+  agama            Agama
+  anakKe           String   @map("anak_ke")
+  kewarganegaraan  String
+  noHp             String   @map("no_hp")
+  status           String
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  userId           Int      @unique
+  user             User     @relation(fields: [userId], references: [id])
+
+  @@map("profiles")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum Agama {
+  Islam
+  Kristen
+  Hindu
+  Budha
+}

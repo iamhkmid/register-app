@@ -2,8 +2,8 @@ import axios from "axios";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 
-const endpoint = "https://register-app-upnyk.herokuapp.com";
-// const endpoint = "http://localhost:3000";
+// const endpoint = "https://register-app-upnyk.herokuapp.com";
+const endpoint = "http://localhost:3000";
 
 export const getStaticProps = async () => {
   let data;
