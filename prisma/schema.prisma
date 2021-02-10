@@ -6,7 +6,7 @@ datasource db {
   // provider = "mysql"
   // url      = env("DATABASE_URL")
   provider = "sqlite"
-  url      = "file:./prisma/dev.db"
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -16,7 +16,7 @@ model User {
   name        String?
   email       String?
   password    String
-  role        UserRole     @default(USER)
+  role        String
   createdAt   DateTime     @default(now()) @map("created_at")
   updatedAt   DateTime     @updatedAt @map("updated_at")
   accessToken AccessToken?
@@ -61,7 +61,7 @@ model Profile {
   noHpIbu          String   @map("no_hp_ibu")
   alamatLengkap    String   @map("alamat_lengkap")
   penyakit         String?
-  agama            Agama
+  agama            String
   anakKe           String   @map("anak_ke")
   kewarganegaraan  String
   noHp             String   @map("no_hp")
@@ -74,14 +74,14 @@ model Profile {
   @@map("profiles")
 }
 
-enum UserRole {
-  USER
-  ADMIN
-}
+// enum UserRole {
+//   USER
+//   ADMIN
+// }
 
-enum Agama {
-  Islam
-  Kristen
-  Hindu
-  Budha
-}
+// enum Agama {
+//   Islam
+//   Kristen
+//   Hindu
+//   Budha
+// }
