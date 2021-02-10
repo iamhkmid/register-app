@@ -6,7 +6,7 @@ datasource db {
   // provider = "mysql"
   // url      = env("DATABASE_URL")
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = "file:./prisma/dev.db"
 }
 
 model User {
